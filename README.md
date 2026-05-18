@@ -63,6 +63,7 @@
 ### Windows PowerShell
 
 ```powershell
+git clone https://github.com/Torentine/yolov8-vehicle-tracking-counting.git
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
@@ -72,6 +73,7 @@ python -m pip install -r requirements.txt
 ### Linux/macOS
 
 ```bash
+git clone https://github.com/Torentine/yolov8-vehicle-tracking-counting.git
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
@@ -175,78 +177,4 @@ python -c "import json, ast, pathlib; p=pathlib.Path('vehicle_tracking_counting.
 
 ```bash
 python -c "from pathlib import Path; import csv, collections; all_videos={p.as_posix() for p in Path('drivingDataset').rglob('*.mp4')}; train=[x.strip() for x in Path('dataset_splits/train.txt').read_text().splitlines() if x.strip()]; test=[x.strip() for x in Path('dataset_splits/test.txt').read_text().splitlines() if x.strip()]; assert len(train)==48 and len(test)==12; assert len(train+test)==len(set(train+test))==60; assert set(train+test)==all_videos; assert not (set(train)&set(test)); rows=list(csv.DictReader(Path('dataset_splits/dataset_split.csv').open(newline='', encoding='utf-8'))); assert len(rows)==60; print('Dataset split OK')"
-```
-
-## Что заливать на Git
-
-Заливать:
-
-- `vehicle_tracking_counting.ipynb`
-- `requirements.txt`
-- `README.md`
-- `.gitignore`
-- `.gitattributes`
-- `dataset_splits/train.txt`
-- `dataset_splits/test.txt`
-- `dataset_splits/dataset_split.csv`
-- `drivingDataset/normalDay/*.mp4`
-- `drivingDataset/normalNight/*.mp4`
-- `drivingDataset/rainyDay/*.mp4`
-
-Не заливать:
-
-- `outputs/`
-- `models/`
-- `*.pt`, включая `yolov8n.pt` и `models/license_plate_detector.pt`
-- `.idea/`
-- `.ipynb_checkpoints/`
-
-Видео из `drivingDataset` заливать нужно, но именно через Git LFS, а не как обычные Git blob-файлы.
-
-## Команды для Git
-
-Сначала установите Git LFS, если он еще не установлен:
-
-```bash
-git lfs install
-```
-
-Инициализация репозитория и настройка LFS:
-
-```bash
-git init
-git lfs install
-git lfs track "drivingDataset/**/*.mp4"
-git lfs track "*.pt"
-git lfs track "*.onnx"
-git lfs track "*.engine"
-git add .gitattributes .gitignore README.md requirements.txt vehicle_tracking_counting.ipynb dataset_splits/ drivingDataset/
-git commit -m "Add vehicle tracking notebook"
-```
-
-Подключение удаленного репозитория:
-
-```bash
-git remote add origin <URL_ВАШЕГО_РЕПОЗИТОРИЯ>
-git branch -M main
-git push -u origin main
-```
-
-Перед коммитом проверьте, что тяжелые файлы не попали в индекс:
-
-```bash
-git status
-git lfs ls-files
-```
-
-В `git lfs ls-files` должны отображаться `.mp4` файлы из `drivingDataset`. В `git status` не должно быть `outputs`, `models` и локальных `.pt` файлов.
-
-После клонирования другим пользователям нужно загрузить LFS-файлы:
-
-```bash
-git clone <URL_ВАШЕГО_РЕПОЗИТОРИЯ>
-cd <ИМЯ_РЕПОЗИТОРИЯ>
-git lfs pull
-python -m pip install -r requirements.txt
-jupyter notebook vehicle_tracking_counting.ipynb
 ```
