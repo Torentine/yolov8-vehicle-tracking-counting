@@ -1,0 +1,12 @@
+drivingDataset/normalDay/nD_17.mp4
+drivingDataset/normalDay/nD_18.mp4
+drivingDataset/normalDay/ND_19.mp4
+drivingDataset/normalDay/nD_20.mp4
+drivingDataset/normalNight/nN_17.mp4
+drivingDataset/normalNight/nN_18.mp4
+drivingDataset/normalNight/nN_19.mp4
+drivingDataset/normalNight/nN_20.mp4
+drivingDataset/rainyDay/rD_17.mp4
+drivingDataset/rainyDay/rD_18.mp4
+drivingDataset/rainyDay/rD_19.mp4
+drivingDataset/rainyDay/rD_20.mp4

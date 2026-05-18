@@ -1,0 +1,19 @@
+.idea/
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Generated artifacts are too large/noisy for normal Git.
+outputs/
+models/
+*.pt
+*.onnx
+*.engine
+
+# Keep dataset and split manifests in Git. Dataset videos are tracked via Git LFS.
+!drivingDataset/
+!drivingDataset/**/
+!drivingDataset/**/*.mp4
+!dataset_splits/
+!dataset_splits/*.txt
+!dataset_splits/*.csv
