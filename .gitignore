@@ -4,7 +4,6 @@ __pycache__/
 *.pyc
 
 # Generated artifacts are too large/noisy for normal Git.
-outputs/
 models/
 *.pt
 *.onnx
